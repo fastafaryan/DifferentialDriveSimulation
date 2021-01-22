@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float maxHeight = 10f;
     [SerializeField]
-    private float defaultHeight = 2.5f;
+    private float defaultHeight = 2f;
     private float currentHeight;
     #endregion
 
@@ -133,13 +133,16 @@ public class CameraController : MonoBehaviour
 
     public void ResetCamera()
     {
-        transform.position = new Vector3(0, defaultHeight, 0);
+        Debug.Log("[INFO] Camera position is reset.");
+        CameraController.Instance.transform.position = new Vector3(0, defaultHeight, 0);
     }
 
 
+    // Set camera position to above of Robot. (Robot is accesed from SimulationController.Robot) 
     public void GoToRobot()
     {
-        transform.position = new Vector3(RobotController.Instance.transform.position.x, defaultHeight, RobotController.Instance.transform.position.z);
+        Debug.Log("[INFO] Camera is alligned to robot.");
+       CameraController.Instance.transform.position = new Vector3(SimulationController.Instance.Robot.transform.position.x, defaultHeight, SimulationController.Instance.Robot.transform.position.z);
     }
     #endregion
 }

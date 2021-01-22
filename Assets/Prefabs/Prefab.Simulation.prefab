@@ -43,6 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865a4eca3a3e5734aae35b40fdb0f41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robot: {fileID: 0}
-  timer: 0
+  robotPrefab: {fileID: 8905389630233420297, guid: be50163b6062c27419c8c89f42896d87, type: 3}
   isSimulating: 1

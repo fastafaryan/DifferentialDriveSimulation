@@ -27,11 +27,17 @@ public class RobotController : MonoBehaviour
     private float wheelDiameter = 0.1f; //meters
     [SerializeField]
     private float rightWheelAngularVelocity = 0f;
-    public float RightWheelAngularVelocity { get { return rightWheelAngularVelocity; } }
+    public float RightWheelAngularVelocity { 
+        get { return rightWheelAngularVelocity; } 
+        set { rightWheelAngularVelocity = value; } 
+    }
     [SerializeField]
     private float leftWheelAngularVelocity = 0f;
-    public float LeftWheelAngularVelocity { get { return leftWheelAngularVelocity; } }
-
+    public float LeftWheelAngularVelocity
+    {
+        get { return leftWheelAngularVelocity; }
+        set { leftWheelAngularVelocity = value; }
+    }
     [SerializeField]
     private GameObject iccPointerPrefab = null;
     private GameObject iccPointer = null;
@@ -123,7 +129,6 @@ public class RobotController : MonoBehaviour
             trajectoryPointers.Add(Instantiate(trajectoryPointerPrefab, transform.position, Quaternion.identity));
         }
         //Debug.Log((transform.position.x) + " : " + (transform.position.z) + " : " + (transform.eulerAngles.y / 57.2957795f));
-        #endregion
 
     }
 
@@ -180,5 +185,6 @@ public class RobotController : MonoBehaviour
         // Set new wheel angular velocities
         SetWheelAngularVelocities(wL, wR);
     }
+    #endregion
 
 }

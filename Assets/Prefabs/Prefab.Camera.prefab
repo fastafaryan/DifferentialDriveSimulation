@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4924933487053607346}
   - component: {fileID: 4924933487053607341}
   m_Layer: 0
-  m_Name: Prefab.MainCamera
+  m_Name: Prefab.Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,4 +102,4 @@ MonoBehaviour:
   mouseZoomSensivity: 250
   minHeight: 1
   maxHeight: 10
-  defaultHeight: 5
+  defaultHeight: 2

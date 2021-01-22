@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8905389630233420404}
   - component: {fileID: 8905389630233420405}
   - component: {fileID: 8905389630233420298}
-  - component: {fileID: 8905389630233420299}
+  - component: {fileID: 2555874125742041896}
   m_Layer: 0
   m_Name: Prefab.Robot
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8905389630233420297}
-  m_LocalRotation: {x: 0, y: -0.88937646, z: 0, w: 0.45717564}
-  m_LocalPosition: {x: 0.12, y: 0, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.049999997, z: 0.15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -125.59, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8905389630233420405
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8905389630233420299
+--- !u!114 &2555874125742041896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

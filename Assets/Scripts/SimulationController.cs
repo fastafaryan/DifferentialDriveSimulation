@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SimulationController : MonoBehaviour
 {
@@ -22,7 +23,9 @@ public class SimulationController : MonoBehaviour
     #region Properties
 
     [SerializeField]
-    private GameObject robot = null;
+    private GameObject robotToSpawn = null;
+
+    private GameObject robot;
     public GameObject Robot { get { return robot; } }
 
     private float timer = 0.0f;
@@ -31,6 +34,13 @@ public class SimulationController : MonoBehaviour
     public bool isSimulating = false;
     #endregion
 
+    #region
+    private void Start()
+    {
+        // Spawn robot.
+        Debug.Log("[INFO] Robot spawned!");
+        robot = Instantiate<GameObject>(robotToSpawn, Vector3.zero, Quaternion.identity);
+    }
 
     // Update is called once per frame
     void Update()
@@ -43,50 +53,63 @@ public class SimulationController : MonoBehaviour
 
     void Simulate()
     {
-        // Check is simulation is finished or paused.
-
         // Increase time by delta time
         timer += Time.deltaTime;
         // Calculates and sets robot's pose.
-        robot.GetComponent<RobotController>().SetNextPose();
+        SimulationController.Instance.Robot.GetComponent<RobotController>().SetNextPose();
     }
 
     public void Submit()
     {
-        /*
+        // Return if simulation is ongoing.
+        if(SimulationController.Instance.isSimulating)
+        {
+            UserInterfaceController.Instance.DisplayMessage("Simulation must be stopped to submit new values!");
+            return;
+        }
+
         // Convert inputs to floats, set to 0 if null  
-        float poseXFloat = (poseX.GetComponent<Text>().text != "") ? float.Parse(poseX.GetComponent<Text>().text) : 0;
-        float poseYFloat = (poseX.GetComponent<Text>().text != "") ? float.Parse(poseY.GetComponent<Text>().text) : 0;
-        float poseThetaFloat = (poseX.GetComponent<Text>().text != "") ? float.Parse(poseTheta.GetComponent<Text>().text) : 0;
-        float leftAngularVelocityFloat = (leftAngularVelocity.GetComponent<Text>().text != "") ? float.Parse(leftAngularVelocity.GetComponent<Text>().text) : 0;
-        float rightAngularVelocityFloat = (rightAngularVelocity.GetComponent<Text>().text != "") ? float.Parse(rightAngularVelocity.GetComponent<Text>().text) : 0;
+        float poseXFloat = (UserInterfaceController.Instance.poseX.GetComponent<InputField>().text != "") ? 
+            float.Parse(UserInterfaceController.Instance.poseX.GetComponent<InputField>().text) : 0;
+        float poseYFloat = (UserInterfaceController.Instance.poseX.GetComponent<InputField>().text != "") ? 
+            float.Parse(UserInterfaceController.Instance.poseY.GetComponent<InputField>().text) : 0;
+        float poseThetaFloat = (UserInterfaceController.Instance.poseX.GetComponent<InputField>().text != "") ? 
+            float.Parse(UserInterfaceController.Instance.poseTheta.GetComponent<InputField>().text) : 0;
+        float leftAngularVelocityFloat = (UserInterfaceController.Instance.leftAngularVelocity.GetComponent<InputField>().text != "") ? 
+            float.Parse(UserInterfaceController.Instance.leftAngularVelocity.GetComponent<InputField>().text) : 0;
+        float rightAngularVelocityFloat = (UserInterfaceController.Instance.rightAngularVelocity.GetComponent<InputField>().text != "") ? 
+            float.Parse(UserInterfaceController.Instance.rightAngularVelocity.GetComponent<InputField>().text) : 0;
 
         // Set robot position
-        robot.transform.position = new Vector3(poseXFloat, 0, poseYFloat);
+        SimulationController.Instance.Robot.transform.position = new Vector3(poseXFloat, 0, poseYFloat);
         // Set robot rotation
-        robot.transform.eulerAngles = new Vector3(0, poseThetaFloat, 0);
+        SimulationController.Instance.Robot.transform.eulerAngles = new Vector3(0, -1*poseThetaFloat, 0);
 
         // Set robot angular velocities
-        robot.GetComponent<RobotController>().rightWheelAngularVelocity = rightAngularVelocityFloat;
-        robot.GetComponent<RobotController>().leftWheelAngularVelocity = leftAngularVelocityFloat;
-
-        // Disable default simulation
-        //robot.GetComponent<Robot>().isDefaultSimulation = false;
-        */
+        SimulationController.Instance.Robot.GetComponent<RobotController>().RightWheelAngularVelocity = rightAngularVelocityFloat;
+        SimulationController.Instance.Robot.GetComponent<RobotController>().LeftWheelAngularVelocity = leftAngularVelocityFloat;
     }
 
     public void ResetSimulation()
     {
         // Reset timer
-        timer = 0;
+        SimulationController.Instance.timer = 0;
         // Reset robot
-        robot.GetComponent<RobotController>().Reset();
+        SimulationController.Instance.Robot.GetComponent<RobotController>().Reset();
         UserInterfaceController.Instance.UpdateUI();
     }
 
     public void ToggleSimulation()
     {
+        Debug.Log("[INFO] Simulation is toggled.");
+
         isSimulating = !isSimulating;
+        if (isSimulating)
+            Debug.Log("[INFO] Simulation is started.");
+        else 
+            Debug.Log("[INFO] Simulation is stopped.");
+
         UserInterfaceController.Instance.ToggleSimulationButton();
     }
+    #endregion
 }
